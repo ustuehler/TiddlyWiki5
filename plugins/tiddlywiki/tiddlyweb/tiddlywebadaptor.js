@@ -42,7 +42,7 @@ TiddlyWebAdaptor.prototype.getHost = function() {
 
 TiddlyWebAdaptor.prototype.getTiddlerInfo = function(tiddler) {
 	return {
-		bag: tiddler.fields.bag || "default"
+		bag: tiddler.fields.bag
 	};
 };
 
@@ -272,6 +272,8 @@ TiddlyWebAdaptor.prototype.convertTiddlerFromTiddlyWebFormat = function(tiddlerF
 			result[title] = tiddlerFields[title];
 		}
 	});
+        // Make sure there is a "bag" field
+	result.bag = result.bag || self.recipe;
 	// Make sure the revision is expressed as a string
 	if(typeof result.revision === "number") {
 		result.revision = result.revision.toString();
